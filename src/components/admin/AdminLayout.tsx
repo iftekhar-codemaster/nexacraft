@@ -14,6 +14,7 @@ import {
   Menu,
   X
 } from 'lucide-react'
+import { useAdmin } from '@/contexts/AdminContext'
 
 interface AdminLayoutProps {
   children: React.ReactNode
@@ -30,98 +31,96 @@ const navigation = [
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const router = useRouter()
+  const { logout } = useAdmin()
 
-  const handleLogout = () => {
-    // TODO: Implement logout logicebarOpen] = useState(false)
-    router.push('/')  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const handleLogout = async () => {
+    await logout()
   }
 
-  return ( = () => {
-    <div className="min-h-screen bg-gray-100"> // TODO: Implement logout logic
-      {/* Mobile sidebar */}    router.push('/')
+  return (
+    <div className="min-h-screen bg-gray-100">
+      {/* Mobile sidebar */}
       <div className={`fixed inset-0 z-50 lg:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
         <div className="fixed inset-0 bg-black bg-opacity-25" onClick={() => setSidebarOpen(false)} />
         <div className="fixed left-0 top-0 bottom-0 w-64 bg-white shadow-lg">
           <div className="flex items-center justify-center h-16 px-4 border-b">
             <h2 className="text-lg font-semibold">Admin Panel</h2>
-          </div> 'hidden'}`}>
-          <nav className="p-4">=> setSidebarOpen(false)} />
-            <ul className="space-y-2">shadow-lg">
-              {navigation.map((item) => (n p-4 border-b">
-                <li key={item.name}>-semibold">Admin Panel</h2>
-                  <LinknClick={() => setSidebarOpen(false)}>
-                    href={item.href} className="h-6 w-6" />
+          </div>
+          <nav className="p-4">
+            <ul className="space-y-2">
+              {navigation.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
                     className="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-100"
                     onClick={() => setSidebarOpen(false)}
                   >
-                    <item.icon className="h-5 w-5 mr-3" />">
-                    {item.name}on.map((item) => (
+                    <item.icon className="h-5 w-5 mr-3" />
+                    {item.name}
                   </Link>
                 </li>
               ))}
-            </ul> className="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-100"
+            </ul>
           </nav>
         </div>
-      </div>.icon className="h-5 w-5 mr-3" />
-item.name}
-      {/* Desktop sidebar */} </Link>
-      <div className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:w-64 lg:block">/li>
-        <div className="flex flex-col h-full bg-white shadow-lg">}
-          <div className="flex items-center justify-center h-16 px-4 border-b">ul>
-            <h1 className="text-xl font-bold text-gray-900">NexaCraft Admin</h1>nav>
-          </div>        </div>
+      </div>
+
+      {/* Desktop sidebar */}
+      <div className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:w-64 lg:block">
+        <div className="flex flex-col h-full bg-white shadow-lg">
+          <div className="flex items-center justify-center h-16 px-4 border-b">
+            <h1 className="text-xl font-bold text-gray-900">NexaCraft Admin</h1>
+          </div>
           <nav className="flex-1 px-4 py-6">
             <ul className="space-y-2">
               {navigation.map((item) => (
                 <li key={item.name}>
                   <Link
-                    href={item.href}lassName="flex items-center justify-center h-16 px-4 border-b">
-                    className="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900" text-gray-900">NexaCraft Admin</h1>
+                    href={item.href}
+                    className="flex items-center px-3 py-2 text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
                   >
-                    <item.icon className="h-5 w-5 mr-3" />6">
-                    {item.name}">
-                  </Link>on.map((item) => (
+                    <item.icon className="h-5 w-5 mr-3" />
+                    {item.name}
+                  </Link>
                 </li>
               ))}
-            </ul> href={item.href}
-          </nav> text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+            </ul>
+          </nav>
           <div className="p-4 border-t">
-            <button.icon className="h-5 w-5 mr-3" />
-              onClick={handleLogout}item.name}
-              className="flex items-center w-full px-3 py-2 text-gray-700 rounded-md hover:bg-gray-100" </Link>
-            >/li>
-              <LogOut className="h-5 w-5 mr-3" />}
+            <button
+              onClick={handleLogout}
+              className="flex items-center w-full px-3 py-2 text-gray-700 rounded-md hover:bg-gray-100"
+            >
+              <LogOut className="h-5 w-5 mr-3" />
               Logout
             </button>
-          </div>-t">
+          </div>
         </div>
-      </div> onClick={handleLogout}
- px-3 py-2 text-gray-700 rounded-md hover:bg-gray-100"
+      </div>
+
       {/* Main content */}
-      <div className="lg:pl-64"> className="h-5 w-5 mr-3" />
-        {/* Top bar */}gout
-        <div className="sticky top-0 z-40 bg-white shadow-sm border-b">button>
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">div>
-            <button        </div>
+      <div className="lg:pl-64">
+        {/* Top bar */}
+        <div className="sticky top-0 z-40 bg-white shadow-sm border-b">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+            <button
               onClick={() => setSidebarOpen(true)}
               className="lg:hidden p-2 text-gray-500 hover:text-gray-700"
-            >*/}
+            >
               <Menu className="h-6 w-6" />
             </button>
-            <div className="flex-1" />ame="sticky top-0 z-40 bg-white shadow-sm border-b">
-            <div className="flex items-center space-x-4">y-between h-16 px-4 sm:px-6 lg:px-8">
+            <div className="flex-1" />
+            <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-700">Welcome, Admin</span>
-            </div> onClick={() => setSidebarOpen(true)}
-          </div>t-gray-500 hover:text-gray-700"
+            </div>
+          </div>
         </div>
-" />
+
         {/* Page content */}
         <main className="p-4 sm:p-6 lg:p-8">
-          {children}lassName="flex items-center space-x-4">
-        </main>pan className="text-sm text-gray-700">Welcome, Admin</span>
-      </div>div>
-    </div>          </div>
+          {children}
+        </main>
+      </div>
+    </div>
   )
-}  )
 }

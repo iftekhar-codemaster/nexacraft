@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import AdminLayout from '@/components/admin/AdminLayout'
+import AdminProtected from '@/components/admin/AdminProtected'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import {
@@ -63,6 +64,14 @@ const topProducts = [
 ]
 
 export default function AdminDashboard() {
+  return (
+    <AdminProtected>
+      <AdminDashboardContent />
+    </AdminProtected>
+  )
+}
+
+function AdminDashboardContent() {
   const [stats, setStats] = useState(mockStats)
 
   // In real app, fetch stats from Supabase
